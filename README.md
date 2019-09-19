@@ -104,7 +104,7 @@ Its constructor takes three arguments, `eye`, `up` and `forward`.
 The `up` vector must indeed be perpendicular to `forward`; otherwise, Revit will throw 
 *Autodesk.Revit.Exceptions.ArgumentsInconsistentException: The vectors upDirection and forwardDirection are not perpendicular*.
 
-In the intial version, we simply calculate `up` from `eye` and `forward` like this, also taking a vertical view direction into account:
+In the initial version, we simply calculate `up` from `eye` and `forward` like this, also taking a vertical view direction into account:
 
 ```
     XYZ eye = form.Eye;
