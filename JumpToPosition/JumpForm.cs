@@ -11,6 +11,22 @@ namespace JumpToPosition
       InitializeComponent();
     }
 
+    public XYZ Target
+    {
+      get
+      {
+        return Util.ParseXyz( textBoxTarget.Text );
+      }
+    }
+
+    public XYZ Viewdir
+    {
+      get
+      {
+        return Util.ParseXyz( textBoxViewdir.Text );
+      }
+    }
+
     private void textBoxTarget_Validating( object sender, CancelEventArgs e )
     {
       string s = textBoxTarget.Text;
