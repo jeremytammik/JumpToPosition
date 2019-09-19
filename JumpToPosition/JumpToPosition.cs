@@ -38,16 +38,29 @@ namespace JumpToPosition
 
           view.SetOrientation( orientation );
 
+          // A call to Regenerate on its own has no effect.
+          //doc.Regenerate();
+
           // Set a parameter to force a view refresh, cf.
           // Setting a Parameter to Regenerate the Model
           // https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3
+          // If the original view name is "{3D}", we are
+          // unable to reset it after changing it, because 
+          // it contains invalid characters.
 
-          Parameter p = view.get_Parameter( 
-            BuiltInParameter.VIEW_NAME );
-          string n = p.AsString();
-          p.Set( "JumpToPosition" );
+          //Parameter p = view.get_Parameter( 
+          //  BuiltInParameter.VIEW_NAME );
+          //string n = p.AsString();
+          //p.Set( "JumpToPosition" );
+          //doc.Regenerate();
+          //p.Set( n );
+
+          Parameter p = view.get_Parameter(
+            BuiltInParameter.VIEWER_BOUND_ACTIVE_FAR );
+          int b = p.AsInteger();
+          p.Set( (0 == b) ? 1 : 0 );
           doc.Regenerate();
-          p.Set( n );
+          p.Set( b );
 
           tx.Commit();
         }

@@ -48,3 +48,23 @@ The view settings jump to that position.
 ### Setting the View Orientation
 
 ### Refreshing the View
+
+### Setting the View Name to Force Refresh
+
+          // Set a parameter to force a view refresh, cf.
+          // Setting a Parameter to Regenerate the Model
+          // https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3
+          // If the original view name is "{3D}", we are
+          // unable to reset it after changing it, because 
+          // it contains invalid characters.
+
+          //Parameter p = view.get_Parameter( 
+          //  BuiltInParameter.VIEW_NAME );
+          //string n = p.AsString();
+          //p.Set( "JumpToPosition" );
+          //doc.Regenerate();
+          //p.Set( n );
+This works:
+
+VIEW_PARTS_VISIBILITY
+VIEWER_BOUND_ACTIVE_FAR
