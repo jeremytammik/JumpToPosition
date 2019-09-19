@@ -36,7 +36,14 @@ namespace JumpToPosition
           ViewOrientation3D orientation
             = new ViewOrientation3D( eye, up, forward );
 
-          view.SetOrientation( orientation ); 
+          view.SetOrientation( orientation );
+
+          Parameter p = view.get_Parameter( 
+            BuiltInParameter.VIEW_NAME );
+          string n = p.AsString();
+          p.Set( "Jumping to Position" );
+          doc.Regenerate();
+          p.Set( n );
 
           tx.Commit();
         }
