@@ -34,7 +34,9 @@ Here is a tiny plugin to do that.
 - Enter the eye position and view direction vector X, Y and Z coordinates
 - Click `Jump`
 
-The view settings jump to that position.
+The view settings jump to that position and the view refreshes.
+
+The latter is the tricky part, in fact.
 
 ## To Do
 
