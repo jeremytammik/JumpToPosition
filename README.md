@@ -31,7 +31,7 @@ in [CmdNewSpotElevation.cs lines 110-174](https://github.com/jeremytammik/the_bu
 Here is a tiny plugin to do that.
 
 - In Revit, launch the command in a 3D view
-- Enter the eye position and view direction vector X, Y and Z cooredinates
+- Enter the eye position and view direction vector X, Y and Z coordinates
 - Click `Jump`
 
 The view settings jump to that position.
