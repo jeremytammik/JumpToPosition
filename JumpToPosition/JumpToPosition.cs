@@ -8,7 +8,7 @@ namespace JumpToPosition
   class JumpToPosition
   {
     public JumpToPosition( 
-      Autodesk.Revit.DB.View view, 
+      View3D view, 
       IWin32Window h )
     {
       Document doc = view.Document;
@@ -25,10 +25,18 @@ namespace JumpToPosition
 
           XYZ eye = form.Eye;
           XYZ forward = form.Viewdir;
-          XYZ up = XYZ.BasisZ;
+          XYZ left = XYZ.BasisZ.CrossProduct( forward );
+          XYZ up = forward.CrossProduct( left );
 
-          ViewOrientation3D viewOrientation3D
+          // Setting ùp`to the Z axis, XYZ.BasisZ, throws
+          // Autodesk.Revit.Exceptions.ArgumentsInconsistentException:
+          // The vectors upDirection and forwardDirection 
+          // are not perpendicular.
+
+          ViewOrientation3D orientation
             = new ViewOrientation3D( eye, up, forward );
+
+          view.SetOrientation( orientation );
 
           tx.Commit();
         }

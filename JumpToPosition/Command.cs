@@ -19,10 +19,12 @@ namespace JumpToPosition
       UIDocument uidoc = uiapp.ActiveUIDocument;
       Application app = uiapp.Application;
       Document doc = uidoc.Document;
-      View view = (null == doc) ? null : doc.ActiveView;
 
-      if( null == view
-        || !(view is View3D) )
+      View3D view = (null == doc) 
+        ? null 
+        : doc.ActiveView as View3D;
+
+      if( null == view )
       {
         message = "Please run this command in a 3D view";
         return Result.Failed;
