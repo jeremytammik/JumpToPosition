@@ -130,7 +130,7 @@ on [Setting a Parameter to Regenerate the Model](https://thebuildingcoder.typepa
 
 I searched for a parameter that changes as little as possible in the model to avoid performance costs.
 
-I initially tried to use the view `Name`. That works and does indeed refresh the view.
+I initially tried to use the view `Name`. That works and does trigger a view refresh.
 
 Unfortunately, if the original view name is "{3D}", we are unable to reset it after changing it, because it contains invalid characters.
 
