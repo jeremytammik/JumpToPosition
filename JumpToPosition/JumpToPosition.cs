@@ -38,10 +38,14 @@ namespace JumpToPosition
 
           view.SetOrientation( orientation );
 
+          // Set a parameter to force a view refresh, cf.
+          // Setting a Parameter to Regenerate the Model
+          // https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3
+
           Parameter p = view.get_Parameter( 
             BuiltInParameter.VIEW_NAME );
           string n = p.AsString();
-          p.Set( "Jumping to Position" );
+          p.Set( "JumpToPosition" );
           doc.Regenerate();
           p.Set( n );
 
