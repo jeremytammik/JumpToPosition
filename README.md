@@ -123,9 +123,9 @@ Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the co
 
 The view does not refresh by itself after setting the `ViewOrientation3D`.
 
-Calling `doc.Regenerate` on its own has no effect.
+Calling `doc.Regenerate` on its own has no effect either.
 
-We can modify a parameter value to force a view refresh, as described in the article 
+We can modify a parameter value to force a view refresh, as described in the note 
 on [Setting a Parameter to Regenerate the Model](https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3).
 
 I searched for a parameter that changes as little as possible in the model to avoid performance costs.
