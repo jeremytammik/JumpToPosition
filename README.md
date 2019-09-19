@@ -49,7 +49,7 @@ The latter is the tricky part, in fact.
 
 The eye position and view direction vector data is entered in a text box in a Windows form.
 
-To ensure that valid coordintates are entered that can be parsed into a Revit `XYZ` object, validation is added to the form using the `TextBox` `Validating` and `Validated` events.
+To ensure that valid coordinates are entered that can be successfully parsed into a Revit `XYZ` object, validation is added to the form using the `TextBox` `Validating` and `Validated` events.
 
 They require a predicate to test whether the current data can be successfully parsed into a 3D `XYZ` object.
 
