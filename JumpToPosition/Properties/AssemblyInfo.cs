@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "JumpToPosition" )]
-[assembly: AssemblyDescription( "" )]
+[assembly: AssemblyDescription( ".NET C# Revit add-in setting view target and view direction to specified values" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
 [assembly: AssemblyProduct( "JumpToPosition" )]
-[assembly: AssemblyCopyright( "Copyright ©  2019" )]
+[assembly: AssemblyCopyright( "Copyright (C) 2019 by Jeremy Tammik, The Building Coder, https://thebuildingcoder.typepad.com" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -29,8 +29,9 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "1.0.0.0" )]
-[assembly: AssemblyFileVersion( "1.0.0.0" )]
+// History:
+//
+// 2019-09-19 2020.0.0.1 working version with jump and view refresh
+// 
+[assembly: AssemblyVersion( "2020.0.0.1" )]
+[assembly: AssemblyFileVersion( "2020.0.0.1" )]
