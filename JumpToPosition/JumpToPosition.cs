@@ -22,6 +22,14 @@ namespace JumpToPosition
         using( Transaction tx = new Transaction( doc ) )
         {
           tx.Start( "Jump to Position" );
+
+          XYZ eye = form.Eye;
+          XYZ forward = form.Viewdir;
+          XYZ up = XYZ.BasisZ;
+
+          ViewOrientation3D viewOrientation3D
+            = new ViewOrientation3D( eye, up, forward );
+
           tx.Commit();
         }
       }

@@ -11,11 +11,11 @@ namespace JumpToPosition
       InitializeComponent();
     }
 
-    public XYZ Target
+    public XYZ Eye
     {
       get
       {
-        return Util.ParseXyz( textBoxTarget.Text );
+        return Util.ParseXyz( textBoxEye.Text );
       }
     }
 
@@ -27,9 +27,9 @@ namespace JumpToPosition
       }
     }
 
-    private void textBoxTarget_Validating( object sender, CancelEventArgs e )
+    private void textBoxEye_Validating( object sender, CancelEventArgs e )
     {
-      string s = textBoxTarget.Text;
+      string s = textBoxEye.Text;
       XYZ p;
       try
       {
@@ -40,10 +40,10 @@ namespace JumpToPosition
         // Cancel the event.
         e.Cancel = true;
         // Select the text to be corrected by the user.
-        textBoxTarget.Select( 0, textBoxTarget.Text.Length );
+        textBoxEye.Select( 0, textBoxEye.Text.Length );
         // Report error.
-        this.errorProvider1.SetError( textBoxTarget,
-          "Invalid target point: " + s );
+        this.errorProvider1.SetError( textBoxEye,
+          "Invalid eye position: " + s );
       }
     }
 
@@ -67,9 +67,9 @@ namespace JumpToPosition
       }
     }
 
-    private void textBoxTarget_Validated( object sender, System.EventArgs e )
+    private void textBoxEye_Validated( object sender, System.EventArgs e )
     {
-      errorProvider1.SetError( textBoxTarget, "" );
+      errorProvider1.SetError( textBoxEye, "" );
     }
 
     private void textBoxViewdir_Validated( object sender, System.EventArgs e )
