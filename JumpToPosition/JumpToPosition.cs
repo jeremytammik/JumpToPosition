@@ -82,6 +82,7 @@ namespace JumpToPosition
 
           view.SetOrientation( orientation );
 
+          RefreshView( view );
 
           tx.Commit();
         }
