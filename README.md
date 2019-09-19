@@ -45,26 +45,95 @@ The view settings jump to that position.
 
 ### Windows Forms TextBox XYZ Validation
 
+The eye position and view direction vector data is entered in a text box in a Windows form.
+
+To ensure that valid coordintates are entered that can be parsed into a Revit `XYZ` object, validation is added to the form using the `TextBox` `Validating` and `Validated` events.
+
+They require a predicate to test whether the current data can be successfully parsed into a 3D `XYZ` object.
+
+Such a predicate is supplied by the new `ParseXyz` method:
+
+```
+    /// <summary>
+    /// Parse an XYZ point or vector from a string
+    /// </summary>
+    public static XYZ ParseXyz( string s )
+    {
+      char[] delimiters = new[] { ',', ';', ' ' };
+
+      string[] coords = s.Split( delimiters, 
+        StringSplitOptions.RemoveEmptyEntries );
+
+      double x = 0, y = 0, z = 0;
+      int j = 0;
+
+      foreach( string coord in coords )
+      {
+        switch( j )
+        {
+          case 0:
+            x = Double.Parse( coord );
+            break;
+          case 1:
+            y = Double.Parse( coord );
+            break;
+          case 2:
+            z = Double.Parse( coord );
+            break;
+          default:
+            break;
+        }
+        j++;
+      }
+      if( 3 != j )
+      {
+        throw new System.FormatException(
+          "Unable to parse X, Y and Z coordinates" );
+      }
+      return new XYZ( x, y, z );
+    }
+```
+
 ### Setting the View Orientation
+
+The view orientation can easily be set as described in the article
+on [setting up your ViewOrientation3D](http://thebuildingcoder.typepad.com/blog/2013/04/setting-up-your-vieworientation3d.html).
+
+Its constructor takes three arguments, `eye`, `up` and `forward`.
+
+The `up` vector must indeed be perpendicular to `forward`; otherwise, Revit will throw 
+*Autodesk.Revit.Exceptions.ArgumentsInconsistentException: The vectors upDirection and forwardDirection are not perpendicular*.
+
+In the intial version, we simply calculate `up` from `eye` and `forward` like this, also taking a vertical view direction into account:
+
+```
+    XYZ eye = form.Eye;
+    XYZ forward = form.Viewdir;
+  
+    XYZ left = Util.IsVertical( forward )
+      ? -XYZ.BasisX
+      : XYZ.BasisZ.CrossProduct( forward );
+  
+    XYZ up = forward.CrossProduct( left );
+```
+
+Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the complete implementation.
 
 ### Refreshing the View
 
-### Setting the View Name to Force Refresh
+The view does not refresh by itself after setting the `ViewOrientation3D`.
 
-          // Set a parameter to force a view refresh, cf.
-          // Setting a Parameter to Regenerate the Model
-          // https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3
-          // If the original view name is "{3D}", we are
-          // unable to reset it after changing it, because 
-          // it contains invalid characters.
+Calling `doc.Regenerate` on its own has no effect.
 
-          //Parameter p = view.get_Parameter( 
-          //  BuiltInParameter.VIEW_NAME );
-          //string n = p.AsString();
-          //p.Set( "JumpToPosition" );
-          //doc.Regenerate();
-          //p.Set( n );
-This works:
+We can modify a parameter value to force a view refresh, as described in the article 
+on [Setting a Parameter to Regenerate the Model](https://thebuildingcoder.typepad.com/blog/2017/11/cloud-model-predicate-and-set-parameter-regenerates.html#3).
 
-VIEW_PARTS_VISIBILITY
-VIEWER_BOUND_ACTIVE_FAR
+I searched for a parameter that changes as little as possible in the model to avoid performance costs.
+
+I initially tried to use the view `Name`. That works and does indeed refresh the view.
+
+Unfortunately, if the original view name is "{3D}", we are unable to reset it after changing it, because it contains invalid characters.
+
+Next, I tried toggling the 'far bound active' on and off, and that works as well.
+
+Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the complete implementation.
