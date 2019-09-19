@@ -69,7 +69,11 @@ namespace JumpToPosition
 
           XYZ eye = form.Eye;
           XYZ forward = form.Viewdir;
-          XYZ left = XYZ.BasisZ.CrossProduct( forward );
+
+          XYZ left = Util.IsVertical( forward )
+            ? -XYZ.BasisX
+            : XYZ.BasisZ.CrossProduct( forward );
+
           XYZ up = forward.CrossProduct( left );
 
           // Setting ùp`to the Z axis, XYZ.BasisZ, throws

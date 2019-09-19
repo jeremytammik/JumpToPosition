@@ -6,6 +6,22 @@ namespace JumpToPosition
 {
   class Util
   {
+    #region Geometrical Comparison
+    public const double _eps = 1.0e-9;
+
+    public static bool IsZero(
+      double a,
+      double tolerance = _eps )
+    {
+      return tolerance > Math.Abs( a );
+    }
+
+    public static bool IsVertical( XYZ v )
+    {
+      return IsZero( v.X ) && IsZero( v.Y );
+    }
+    #endregion // Geometrical Comparison
+
     /// <summary>
     /// Parse an XYZ point or vector from a string
     /// </summary>
