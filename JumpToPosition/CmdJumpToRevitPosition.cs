@@ -8,7 +8,7 @@ using Autodesk.Revit.UI;
 namespace JumpToPosition
 {
   [Transaction( TransactionMode.Manual )]
-  public class Command : IExternalCommand
+  public class CmdJumpToRevitPosition : IExternalCommand
   {
     public Result Execute(
       ExternalCommandData commandData,

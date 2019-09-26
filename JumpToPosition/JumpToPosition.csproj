@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
+    <Compile Include="CmdJumpToRevitPosition.cs" />
     <Compile Include="JtWindowHandle.cs" />
     <Compile Include="JumpForm.cs">
       <SubType>Form</SubType>
