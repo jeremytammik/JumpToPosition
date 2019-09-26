@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdJumpToBrowserView.cs" />
     <Compile Include="CmdJumpToRevitPosition.cs" />
     <Compile Include="JtWindowHandle.cs" />
     <Compile Include="JumpForm.cs">
