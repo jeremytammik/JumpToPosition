@@ -1,6 +1,7 @@
 ﻿#region Namespaces
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -14,19 +15,17 @@ namespace JumpToPosition
   [Transaction( TransactionMode.Manual )]
   public class CmdJumpToBrowserView : IExternalCommand
   {
-    public Result Execute(
-      ExternalCommandData commandData,
+    Result GetSingleSelectedElement(
+      UIDocument uidoc,
       ref string message,
-      ElementSet elements )
+      out Element e )
     {
-      UIApplication uiapp = commandData.Application;
-      UIDocument uidoc = uiapp.ActiveUIDocument;
-      Application app = uiapp.Application;
       Document doc = uidoc.Document;
       Selection sel = uidoc.Selection;
       ICollection<ElementId> ids = sel.GetElementIds();
       int n = ids.Count;
-      Element e = null;
+
+      e = null;
 
       if( 1 == n )
       {
@@ -57,19 +56,43 @@ namespace JumpToPosition
 
         return Result.Failed;
       }
-
-      Parameter p = e.get_Parameter( BuiltInParameter.ALL_MODEL_MARK );
-
-      if( null != p )
-      {
-        string s = p.AsString();
-        if( null != s && s.ToLower().StartsWith( "html" ) )
-        {
-          Process.Start( s );
-        }
-      }
-
       return Result.Succeeded;
+    }
+
+    string GenerateHtmlFileFor( Element e )
+    {
+      string path = "C:/tmp/CmdJumpToBrowserView.html";
+      using( StreamWriter s = new StreamWriter( path ) )
+      {
+        s.WriteLine( string.Format(
+          "<html>\n<body>\n<p>{0}</p>\n</body>\n<html>",
+          Util.ElementDescription( e ) ) );
+
+        s.Close();
+      }
+      return path;
+    }
+
+    public Result Execute(
+      ExternalCommandData commandData,
+      ref string message,
+      ElementSet elements )
+    {
+      UIApplication uiapp = commandData.Application;
+      UIDocument uidoc = uiapp.ActiveUIDocument;
+      Application app = uiapp.Application;
+      Document doc = uidoc.Document;
+      Element e;
+
+      Result r = GetSingleSelectedElement(
+        uidoc, ref message, out e );
+
+      if( Result.Succeeded == r )
+      {
+        string path = GenerateHtmlFileFor( e );
+        Process.Start( path );
+      }
+      return r;
     }
   }
 }
