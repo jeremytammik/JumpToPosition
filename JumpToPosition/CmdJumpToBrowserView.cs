@@ -261,10 +261,7 @@ namespace JumpToPosition
         + "View: {2}\r\n"
         + "User: {3}\r\n"
         + "Revit: {4}\r\n"
-        + "Model: {5}{6}\r\n"
-        + "Eye location: {6}\r\n"
-        + "View direction: {7}\r\n"
-        + "Up direction: {8}\r\n",
+        + "Model: {5}\r\n",
         Util.ElementDescription( e ),
         GetLevelFor( e, view ),
         view.Name,
