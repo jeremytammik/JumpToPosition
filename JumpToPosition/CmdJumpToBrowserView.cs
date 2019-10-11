@@ -107,6 +107,68 @@ namespace JumpToPosition
     }
 
     /// <summary>
+    /// Return relevant 3D view information (from
+    /// Revit API documentation help file  sample).
+    /// </summary>
+    string GetView3dInfo( View3D view3d )
+    {
+      string message = "3D View: ";
+
+      // The position of the camera and view direction.
+
+      ViewOrientation3D ori = view3d.GetOrientation();
+      XYZ peye = ori.EyePosition;
+      XYZ vforward = ori.ForwardDirection;
+      XYZ vup = ori.UpDirection;
+
+      message += string.Format(
+        "\r\nCamera position: {0}"
+        + "\r\nView direction: {1}"
+        + "\r\nUp direction: {2}",
+        Util.PointString( peye ),
+        Util.PointString( vforward ),
+        Util.PointString( vup ) );
+
+      // Identifies whether the view is a perspective view. 
+
+      if( view3d.IsPerspective )
+      {
+        message += "\r\nThe view is a perspective view.";
+      }
+
+      // The section box of the 3D view can cut the model.
+
+      if( view3d.IsSectionBoxActive )
+      {
+        BoundingBoxXYZ sectionBox = view3d.GetSectionBox();
+
+        // Note that the section box can be rotated 
+        // and transformed. So the min/max corners 
+        // coordinates relative to the model must be 
+        // computed via the transform.
+
+        Transform trf = sectionBox.Transform;
+
+        XYZ max = sectionBox.Max; // Maximum coordinates (upper-right-front corner of the box before transform is applied).
+        XYZ min = sectionBox.Min;  // Minimum coordinates (lower-left-rear corner of the box before transform is applied).
+
+        // Transform the min and max to model coordinates
+
+        XYZ maxInModelCoords = trf.OfPoint( max );
+        XYZ minInModelCoords = trf.OfPoint( min );
+
+        message += "\r\nView has an active section box: ";
+
+        message += "\r\n'Maximum' coordinates: " 
+          + Util.PointString( maxInModelCoords);
+
+        message += "\r\n'Minimum' coordinates: " 
+          + Util.PointString( minInModelCoords);
+      }
+      return message;
+    }
+
+    /// <summary>
     /// Return information to jump to selected element 
     /// in borwser view, e.g., element identifier, 
     /// current level viewed, view name, username, 
@@ -134,6 +196,11 @@ namespace JumpToPosition
 
       Document doc = e.Document;
       Application app = doc.Application;
+      View3D view3d = view as View3D;
+      ViewOrientation3D ori = view3d?.GetOrientation();
+      XYZ peye = null == ori ? XYZ.Zero : ori.EyePosition;
+      XYZ vforward = null == ori ? XYZ.BasisZ : ori.ForwardDirection;
+      XYZ vup = null == ori ? XYZ.BasisY : ori.UpDirection;
 
       string s = string.Format(
         "Element: {0}\r\n"
@@ -150,7 +217,10 @@ namespace JumpToPosition
         view.Name,
         GetUsername(),
         GetAppVersionString( app ),
-        Document.GetDocumentVersion( doc ) );
+        Document.GetDocumentVersion( doc ),
+        (null == view3d)
+          ? "2D View" 
+          : GetView3dInfo( view3d ) );
 
       return s;
     }

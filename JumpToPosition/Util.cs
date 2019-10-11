@@ -22,6 +22,64 @@ namespace JumpToPosition
     }
     #endregion // Geometrical Comparison
 
+    #region Formatting
+    /// <summary>
+    /// Return an English plural suffix for the given
+    /// number of items, i.e. 's' for zero or more
+    /// than one, and nothing for exactly one.
+    /// </summary>
+    public static string PluralSuffix( int n )
+    {
+      return 1 == n ? "" : "s";
+    }
+
+    /// <summary>
+    /// Return an English plural suffix 'ies' or
+    /// 'y' for the given number of items.
+    /// </summary>
+    public static string PluralSuffixY( int n )
+    {
+      return 1 == n ? "y" : "ies";
+    }
+
+    /// <summary>
+    /// Return a dot (full stop) for zero
+    /// or a colon for more than zero.
+    /// </summary>
+    public static string DotOrColon( int n )
+    {
+      return 0 < n ? ":" : ".";
+    }
+
+    /// <summary>
+    /// Return a string for a real number
+    /// formatted to two decimal places.
+    /// </summary>
+    public static string RealString( double a )
+    {
+      return a.ToString( "0.##" );
+    }
+
+    /// <summary>
+    /// Return a string for an XYZ point
+    /// or vector with its coordinates
+    /// formatted to two decimal places.
+    /// </summary>
+    public static string PointString(
+      XYZ p,
+      bool onlySpaceSeparator = false )
+    {
+      string format_string = onlySpaceSeparator
+        ? "{0} {1} {2}"
+        : "({0},{1},{2})";
+
+      return string.Format( format_string,
+        RealString( p.X ),
+        RealString( p.Y ),
+        RealString( p.Z ) );
+    }
+    #endregion // Formatting
+
     /// <summary>
     /// Return a string describing the given element:
     /// .NET type name,
@@ -62,6 +120,7 @@ namespace JumpToPosition
         typeName, categoryName, familyName,
         symbolName, e.Id.IntegerValue, e.Name );
     }
+
     /// <summary>
     /// Parse an XYZ point or vector from a string
     /// </summary>
