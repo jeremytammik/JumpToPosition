@@ -112,7 +112,7 @@ namespace JumpToPosition
     /// </summary>
     string GetViewInfo( View view )
     {
-      string message = "View: ";
+      string message = string.Empty;
 
       // Get the name of the view
 
@@ -261,26 +261,23 @@ namespace JumpToPosition
         + "View: {2}\r\n"
         + "User: {3}\r\n"
         + "Revit: {4}\r\n"
-        + "Model: {5}\r\n",
+        + "Model: {5}",
         Util.ElementDescription( e ),
         GetLevelFor( e, view ),
         view.Name,
         GetUsername(),
         GetAppVersionString( app ),
-        Document.GetDocumentVersion( doc ) );
+        Document.GetDocumentVersion( doc ).VersionGUID );
 
       s += GetViewInfo( view );
 
-      View3D view3d = view as View3D;
-      //ViewOrientation3D ori = view3d?.GetOrientation();
-      //XYZ peye = null == ori ? XYZ.Zero : ori.EyePosition;
-      //XYZ vforward = null == ori ? XYZ.BasisZ : ori.ForwardDirection;
-      //XYZ vup = null == ori ? XYZ.BasisY : ori.UpDirection;
+      //View3D view3d = view as View3D;
 
-      if( null != view3d )
-      {
-        s += GetView3dInfo( view3d );
-      }
+      //if( null != view3d )
+      //{
+      //  s += GetView3dInfo( view3d );
+      //}
+
       return s;
     }
 

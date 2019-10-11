@@ -38,6 +38,7 @@ using System.Runtime.InteropServices;
 // 2019-10-11 2020.0.0.3 implemented GetBrowserViewInfoFor helper methods, except for view direction
 // 2019-10-11 2020.0.0.3 implemented GetView3dInfo
 // 2019-10-11 2020.0.0.3 implemented GetViewInfo
+// 2019-10-11 2020.0.0.3 tested, drop redundant 3D view info, add document version guid
 // 
 [assembly: AssemblyVersion( "2020.0.0.3" )]
 [assembly: AssemblyFileVersion( "2020.0.0.3" )]
