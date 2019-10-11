@@ -61,6 +61,24 @@ namespace JumpToPosition
     }
 
     /// <summary>
+    /// Return a string for a UV point
+    /// or vector with its coordinates
+    /// formatted to two decimal places.
+    /// </summary>
+    public static string PointString(
+      UV p,
+      bool onlySpaceSeparator = false )
+    {
+      string format_string = onlySpaceSeparator
+        ? "{0} {1}"
+        : "({0},{1})";
+
+      return string.Format( format_string,
+        RealString( p.U ),
+        RealString( p.V ) );
+    }
+
+    /// <summary>
     /// Return a string for an XYZ point
     /// or vector with its coordinates
     /// formatted to two decimal places.
@@ -77,6 +95,42 @@ namespace JumpToPosition
         RealString( p.X ),
         RealString( p.Y ),
         RealString( p.Z ) );
+    }
+
+    /// <summary>
+    /// Return a string for this bounding box
+    /// with its coordinates formatted to two
+    /// decimal places.
+    /// </summary>
+    public static string BoundingBoxString(
+      BoundingBoxUV bb,
+      bool onlySpaceSeparator = false )
+    {
+      string format_string = onlySpaceSeparator
+        ? "{0} {1}"
+        : "({0},{1})";
+
+      return string.Format( format_string,
+        PointString( bb.Min, onlySpaceSeparator ),
+        PointString( bb.Max, onlySpaceSeparator ) );
+    }
+
+    /// <summary>
+    /// Return a string for this bounding box
+    /// with its coordinates formatted to two
+    /// decimal places.
+    /// </summary>
+    public static string BoundingBoxString(
+      BoundingBoxXYZ bb,
+      bool onlySpaceSeparator = false )
+    {
+      string format_string = onlySpaceSeparator
+        ? "{0} {1}"
+        : "({0},{1})";
+
+      return string.Format( format_string,
+        PointString( bb.Min, onlySpaceSeparator ),
+        PointString( bb.Max, onlySpaceSeparator ) );
     }
     #endregion // Formatting
 

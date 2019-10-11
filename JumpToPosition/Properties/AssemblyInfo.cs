@@ -37,6 +37,7 @@ using System.Runtime.InteropServices;
 // 2019-10-11 2020.0.0.3 implemented GetLevelFor
 // 2019-10-11 2020.0.0.3 implemented GetBrowserViewInfoFor helper methods, except for view direction
 // 2019-10-11 2020.0.0.3 implemented GetView3dInfo
+// 2019-10-11 2020.0.0.3 implemented GetViewInfo
 // 
 [assembly: AssemblyVersion( "2020.0.0.3" )]
 [assembly: AssemblyFileVersion( "2020.0.0.3" )]

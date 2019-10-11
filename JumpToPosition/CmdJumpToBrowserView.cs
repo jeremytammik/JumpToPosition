@@ -107,6 +107,64 @@ namespace JumpToPosition
     }
 
     /// <summary>
+    /// Return relevant view information (from
+    /// Revit API documentation help file  sample).
+    /// </summary>
+    string GetViewInfo( View view )
+    {
+      string message = "View: ";
+
+      // Get the name of the view
+
+      message += "\r\nView name: " + view.Name;
+
+      // The crop box sets display bounds of the view
+
+      message += "\r\nCrop Box: "
+        + Util.BoundingBoxString( view.CropBox );
+
+      // Get the origin of the screen
+
+      message += "\r\nOrigin: "
+        + Util.PointString( view.Origin );
+
+      // The bounds of the view in paper space in inches.
+
+      message += "\r\nOutline: "
+        + Util.BoundingBoxString( view.Outline );
+
+      // The direction towards the right side of the screen
+
+      message += "\r\nRight direction: "
+        + Util.PointString( view.RightDirection );
+
+      // The direction towards the top of the screen
+
+      message += "\r\nUp direction: "
+        + Util.PointString( view.UpDirection );
+
+      // The direction towards the viewer
+
+      message += "\r\nView direction: "
+        + Util.PointString( view.ViewDirection );
+
+      // The scale of the view
+
+      message += "\r\nScale: " + view.Scale;
+
+      // Scale is meaningless for Schedules
+      //if( view.ViewType != ViewType.Schedule )
+      //{
+      //  int testScale = 5;
+      //  //set the scale of the view
+      //  view.Scale = testScale;
+      //  message += "\r\nScale after set: " + view.Scale;
+      //}
+
+      return message;
+    }
+
+    /// <summary>
     /// Return relevant 3D view information (from
     /// Revit API documentation help file  sample).
     /// </summary>
@@ -159,11 +217,11 @@ namespace JumpToPosition
 
         message += "\r\nView has an active section box: ";
 
-        message += "\r\n'Maximum' coordinates: " 
-          + Util.PointString( maxInModelCoords);
+        message += "\r\n'Maximum' coordinates: "
+          + Util.PointString( maxInModelCoords );
 
-        message += "\r\n'Minimum' coordinates: " 
-          + Util.PointString( minInModelCoords);
+        message += "\r\n'Minimum' coordinates: "
+          + Util.PointString( minInModelCoords );
       }
       return message;
     }
@@ -196,11 +254,6 @@ namespace JumpToPosition
 
       Document doc = e.Document;
       Application app = doc.Application;
-      View3D view3d = view as View3D;
-      ViewOrientation3D ori = view3d?.GetOrientation();
-      XYZ peye = null == ori ? XYZ.Zero : ori.EyePosition;
-      XYZ vforward = null == ori ? XYZ.BasisZ : ori.ForwardDirection;
-      XYZ vup = null == ori ? XYZ.BasisY : ori.UpDirection;
 
       string s = string.Format(
         "Element: {0}\r\n"
@@ -217,11 +270,20 @@ namespace JumpToPosition
         view.Name,
         GetUsername(),
         GetAppVersionString( app ),
-        Document.GetDocumentVersion( doc ),
-        (null == view3d)
-          ? "2D View" 
-          : GetView3dInfo( view3d ) );
+        Document.GetDocumentVersion( doc ) );
 
+      s += GetViewInfo( view );
+
+      View3D view3d = view as View3D;
+      //ViewOrientation3D ori = view3d?.GetOrientation();
+      //XYZ peye = null == ori ? XYZ.Zero : ori.EyePosition;
+      //XYZ vforward = null == ori ? XYZ.BasisZ : ori.ForwardDirection;
+      //XYZ vup = null == ori ? XYZ.BasisY : ori.UpDirection;
+
+      if( null != view3d )
+      {
+        s += GetView3dInfo( view3d );
+      }
       return s;
     }
 
@@ -242,9 +304,9 @@ namespace JumpToPosition
 
       if( Result.Succeeded == r )
       {
-        string browser_view_info 
+        string browser_view_info
           = GetBrowserViewInfoFor( e, view );
-        
+
         //Process.Start( path );
 
         TaskDialog.Show( "Jump to Browser View",
