@@ -63,6 +63,11 @@ namespace JumpToPosition
       return Result.Succeeded;
     }
 
+    /// <summary>
+    /// Return the level currently viewed.
+    /// If that is not well-defined, return the level
+    /// of the given element, else "<nil>".
+    /// </summary>
     string GetLevelFor(
       Element e,
       View view )
@@ -82,11 +87,31 @@ namespace JumpToPosition
     }
 
     /// <summary>
+    /// Return the current user name. Presumably,
+    /// the best source is the Windows login name.
+    /// </summary>
+    string GetUsername()
+    {
+      return "Jeremy";
+    }
+
+    /// <summary>
+    /// Return the Revit application version string.
+    /// </summary>
+    string GetAppVersionString( Application app )
+    {
+      return string.Format(
+        "{0} {1}.{2}.{3}", app.VersionName,
+        app.VersionNumber, app.SubVersionNumber,
+        app.VersionBuild );
+    }
+
+    /// <summary>
     /// Return information to jump to selected element 
     /// in borwser view, e.g., element identifier, 
     /// current level viewed, view name, username, 
     /// Revit version, model version, current view 
-    /// direction (x,y,z, front,up...).
+    /// direction (x,y,z, front, up, ...).
     /// </summary>
     string GetBrowserViewInfoFor(
       Element e,
@@ -107,8 +132,25 @@ namespace JumpToPosition
 #endif // GENERATE_HTML_FILE
       #endregion // Generate HTML file
 
-      string s = Util.ElementDescription( e );
-      s += GetLevelFor( e, view );
+      Document doc = e.Document;
+      Application app = doc.Application;
+
+      string s = string.Format(
+        "Element: {0}\r\n"
+        + "Level: {1}\r\n"
+        + "View: {2}\r\n"
+        + "User: {3}\r\n"
+        + "Revit: {4}\r\n"
+        + "Model: {5}{6}\r\n"
+        + "Eye location: {6}\r\n"
+        + "View direction: {7}\r\n"
+        + "Up direction: {8}\r\n",
+        Util.ElementDescription( e ),
+        GetLevelFor( e, view ),
+        view.Name,
+        GetUsername(),
+        GetAppVersionString( app ),
+        Document.GetDocumentVersion( doc ) );
 
       return s;
     }
@@ -130,8 +172,15 @@ namespace JumpToPosition
 
       if( Result.Succeeded == r )
       {
-        string path = GetBrowserViewInfoFor( e, view );
-        Process.Start( path );
+        string browser_view_info 
+          = GetBrowserViewInfoFor( e, view );
+        
+        //Process.Start( path );
+
+        TaskDialog.Show( "Jump to Browser View",
+          "Generate HTTP request or make web socket "
+          + "call with:\r\n\r\n"
+          + browser_view_info );
       }
       return r;
     }

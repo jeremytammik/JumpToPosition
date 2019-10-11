@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 // 2019-09-26 2020.0.0.2 renamed CmdJumpToRevitPosition and implemented CmdJumpToBrowserView
 // 2019-10-11 2020.0.0.3 renamed GetBrowserViewInfoFor
 // 2019-10-11 2020.0.0.3 implemented GetLevelFor
+// 2019-10-11 2020.0.0.3 implemented GetBrowserViewInfoFor helper methods, except for view direction
 // 
-[assembly: AssemblyVersion( "2020.0.0.3" )]
+[ assembly: AssemblyVersion( "2020.0.0.3" )]
 [assembly: AssemblyFileVersion( "2020.0.0.3" )]
