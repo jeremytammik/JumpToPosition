@@ -15,6 +15,10 @@ namespace JumpToPosition
   [Transaction( TransactionMode.Manual )]
   public class CmdJumpToBrowserView : IExternalCommand
   {
+    /// <summary>
+    /// Return a single preselected element
+    /// or prompt user to select one.
+    /// </summary>
     Result GetSingleSelectedElement(
       UIDocument uidoc,
       ref string message,
@@ -59,8 +63,17 @@ namespace JumpToPosition
       return Result.Succeeded;
     }
 
-    string GenerateHtmlFileFor( Element e )
+    /// <summary>
+    /// Return information to jump to selected element 
+    /// in borwser view, e.g., element identifier, 
+    /// current level viewed, view name, username, 
+    /// Revit version, model version, current view 
+    /// direction (x,y,z, front,up...).
+    /// </summary>
+    string GetBrowserViewInfoFor( Element e )
     {
+      #region Generate HTML file
+#if GENERATE_HTML_FILE
       string path = "C:/tmp/CmdJumpToBrowserView.html";
       using( StreamWriter s = new StreamWriter( path ) )
       {
@@ -71,6 +84,12 @@ namespace JumpToPosition
         s.Close();
       }
       return path;
+#endif // GENERATE_HTML_FILE
+      #endregion // Generate HTML file
+
+      string s = Util.ElementDescription( e );
+
+      return s;
     }
 
     public Result Execute(
@@ -89,7 +108,7 @@ namespace JumpToPosition
 
       if( Result.Succeeded == r )
       {
-        string path = GenerateHtmlFileFor( e );
+        string path = GetBrowserViewInfoFor( e );
         Process.Start( path );
       }
       return r;
