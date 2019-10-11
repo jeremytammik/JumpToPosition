@@ -41,6 +41,7 @@ using System.Runtime.InteropServices;
 // 2019-10-11 2020.0.0.3 tested, drop redundant 3D view info, add document version guid
 // 2019-10-11 2020.0.0.3 convert data to TaskDialog MainContent
 // 2019-10-11 2020.0.0.3 successfully tested
+// 2019-10-11 2020.0.0.4 added DocumentVersion.NumberOfSaves
 // 
-[assembly: AssemblyVersion( "2020.0.0.3" )]
-[assembly: AssemblyFileVersion( "2020.0.0.3" )]
+[assembly: AssemblyVersion( "2020.0.0.4" )]
+[assembly: AssemblyFileVersion( "2020.0.0.4" )]

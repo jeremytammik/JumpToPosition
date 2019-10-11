@@ -252,6 +252,7 @@ namespace JumpToPosition
 
       Document doc = e.Document;
       Application app = doc.Application;
+      DocumentVersion ver = Document.GetDocumentVersion( doc );
 
       string s = string.Format(
         "Element: {0}\r\n"
@@ -259,13 +260,13 @@ namespace JumpToPosition
         + "View: {2}\r\n"
         + "User: {3}\r\n"
         + "Revit: {4}\r\n"
-        + "Model: {5}",
+        + "Model: guid {5} #saves {6}",
         Util.ElementDescription( e ),
         GetLevelFor( e, view ),
         view.Name,
         GetUsername(),
         GetAppVersionString( app ),
-        Document.GetDocumentVersion( doc ).VersionGUID );
+        ver.VersionGUID, ver.NumberOfSaves );
 
       s += GetViewInfo( view );
 
