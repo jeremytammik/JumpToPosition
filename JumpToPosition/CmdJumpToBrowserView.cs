@@ -303,10 +303,16 @@ namespace JumpToPosition
 
         //Process.Start( path );
 
-        TaskDialog.Show( "Jump to Browser View",
-          "Generate HTTP request or make web socket "
-          + "call with:\r\n\r\n"
-          + browser_view_info );
+        using( TaskDialog td = new TaskDialog( 
+          "Jump to Browser View" ) )
+        {
+          td.MainInstruction = "HTTP request "
+            + "or web socket invocation data";
+
+          td.MainContent = browser_view_info;
+
+          td.Show();
+        }
       }
       return r;
     }
