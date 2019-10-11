@@ -1,7 +1,5 @@
 ﻿#region Namespaces
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -92,7 +90,7 @@ namespace JumpToPosition
     /// </summary>
     string GetUsername()
     {
-      return "Jeremy";
+      return "Jeremy"; // todo: implement this
     }
 
     /// <summary>
@@ -300,8 +298,6 @@ namespace JumpToPosition
       {
         string browser_view_info
           = GetBrowserViewInfoFor( e, view );
-
-        //Process.Start( path );
 
         using( TaskDialog td = new TaskDialog( 
           "Jump to Browser View" ) )
