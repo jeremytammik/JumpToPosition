@@ -12,7 +12,7 @@ using Autodesk.Revit.UI.Selection;
 
 namespace JumpToPosition
 {
-  [Transaction( TransactionMode.Manual )]
+  [Transaction( TransactionMode.ReadOnly )]
   public class CmdJumpToBrowserView : IExternalCommand
   {
     /// <summary>
@@ -63,6 +63,24 @@ namespace JumpToPosition
       return Result.Succeeded;
     }
 
+    string GetLevelFor(
+      Element e,
+      View view )
+    {
+      Document doc = e.Document;
+      Element level = null;
+      ElementId id = e.LevelId;
+      if( ElementId.InvalidElementId != id )
+      {
+        level = doc.GetElement( id );
+      }
+      if( null == level )
+      {
+        level = view.GenLevel;
+      }
+      return null == level ? "<nil>" : level.Name;
+    }
+
     /// <summary>
     /// Return information to jump to selected element 
     /// in borwser view, e.g., element identifier, 
@@ -70,7 +88,9 @@ namespace JumpToPosition
     /// Revit version, model version, current view 
     /// direction (x,y,z, front,up...).
     /// </summary>
-    string GetBrowserViewInfoFor( Element e )
+    string GetBrowserViewInfoFor(
+      Element e,
+      View view )
     {
       #region Generate HTML file
 #if GENERATE_HTML_FILE
@@ -88,6 +108,7 @@ namespace JumpToPosition
       #endregion // Generate HTML file
 
       string s = Util.ElementDescription( e );
+      s += GetLevelFor( e, view );
 
       return s;
     }
@@ -101,6 +122,7 @@ namespace JumpToPosition
       UIDocument uidoc = uiapp.ActiveUIDocument;
       Application app = uiapp.Application;
       Document doc = uidoc.Document;
+      View view = doc.ActiveView;
       Element e;
 
       Result r = GetSingleSelectedElement(
@@ -108,7 +130,7 @@ namespace JumpToPosition
 
       if( Result.Succeeded == r )
       {
-        string path = GetBrowserViewInfoFor( e );
+        string path = GetBrowserViewInfoFor( e, view );
         Process.Start( path );
       }
       return r;
