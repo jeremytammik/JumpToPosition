@@ -85,12 +85,11 @@ namespace JumpToPosition
     }
 
     /// <summary>
-    /// Return the current user name. Presumably,
-    /// the best source is the Windows login name.
+    /// Return the current Revit user name.
     /// </summary>
-    string GetUsername()
+    string GetUsername( Application app )
     {
-      return "Jeremy"; // todo: implement this
+      return app.Username;
     }
 
     /// <summary>
@@ -264,7 +263,7 @@ namespace JumpToPosition
         Util.ElementDescription( e ),
         GetLevelFor( e, view ),
         view.Name,
-        GetUsername(),
+        GetUsername( app ),
         GetAppVersionString( app ),
         ver.VersionGUID, ver.NumberOfSaves );
 
