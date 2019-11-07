@@ -43,6 +43,7 @@ using System.Runtime.InteropServices;
 // 2019-10-11 2020.0.0.3 successfully tested
 // 2019-10-11 2020.0.0.4 added DocumentVersion.NumberOfSaves
 // 2019-10-13 2020.0.0.5 implemented GetUsername
+// 2019-11-07 2020.0.0.6 implemented CmdViewListedElements
 // 
-[assembly: AssemblyVersion( "2020.0.0.5" )]
-[assembly: AssemblyFileVersion( "2020.0.0.5" )]
+[assembly: AssemblyVersion( "2020.0.0.6" )]
+[assembly: AssemblyFileVersion( "2020.0.0.6" )]
