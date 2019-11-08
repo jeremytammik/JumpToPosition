@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Autodesk.Revit.DB;
-
+using Autodesk.Revit.UI;
 
 namespace JumpToPosition
 {
@@ -134,6 +135,27 @@ namespace JumpToPosition
     }
     #endregion // Formatting
 
+    #region Display a message
+    const string _caption = "The Building Coder";
+
+    public static void ErrorMsg(
+      string msg )
+    {
+      Debug.WriteLine( msg );
+      TaskDialog.Show( _caption, msg );
+    }
+
+    public static void InfoMsg(
+      string instruction,
+      string content )
+    {
+      Debug.WriteLine( instruction + "\r\n" + content );
+      TaskDialog d = new TaskDialog( _caption );
+      d.MainInstruction = instruction;
+      d.MainContent = content;
+      d.Show();
+    }
+
     /// <summary>
     /// Return a string describing the given element:
     /// .NET type name,
@@ -213,5 +235,6 @@ namespace JumpToPosition
       }
       return new XYZ( x, y, z );
     }
+    #endregion // Display a message
   }
 }
