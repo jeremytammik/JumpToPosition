@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Script.Serialization;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
@@ -86,47 +87,76 @@ namespace JumpToPosition
           }
           else
           {
-            string date_iso = DateTime.Now.ToString( "yyyy-MM-dd" );
-            string view_name = string.Format( "{0}_showing_{1}_elements_{2}",
-              view.Name, ids_to_show.Count, date_iso );
-
-            id_view = view.Duplicate( ViewDuplicateOption.AsDependent );
-            View view2 = doc.GetElement( id_level ) as View;
-            view2.Name = view_name;
-
-            List<ElementId> ids_to_unhide = new List<ElementId>();
-
-            foreach( ElementId id in ids_to_show )
+            using( Transaction tx = new Transaction( doc ) )
             {
-              Element e = doc.GetElement( id );
-              if( e.IsHidden( view2 ) )
+              tx.Start( "Creating view to display specified elements" );
+              string date_iso = DateTime.Now.ToString( "yyyy-MM-dd" );
+              string view_name = string.Format( "{0}_showing_{1}_elements_{2}",
+                view.Name, ids_to_show.Count, date_iso );
+
+              // Delete existing duplicate views
+
+              FilteredElementCollector views
+                = new FilteredElementCollector( doc )
+                  .OfCategory( BuiltInCategory.OST_Views )
+                  .OfClass( typeof( View ) );
+
+              ICollection<ElementId> views_named_ids = views
+                .Where<Element>( v => v.Name.Equals( view_name ) )
+                .Select<Element, ElementId>( v => v.Id )
+                .ToList<ElementId>();
+
+              if( 0 < views_named_ids.Count )
               {
-                ids_to_unhide.Add( id );
+                doc.Delete( views_named_ids );
               }
-            }
-            view2.UnhideElements( ids_to_unhide );
 
-            FilteredElementCollector els
-              = new FilteredElementCollector( doc, view2.Id );
+              // Create new view
 
-            List<ElementId> ids_to_hide = new List<ElementId>();
-            List<ElementId> ids_cannot_hide = new List<ElementId>();
+              id_view = view.Duplicate( ViewDuplicateOption.AsDependent );
+              View view2 = doc.GetElement( id_level ) as View;
+              view2.Name = view_name;
 
-            foreach( Element e in els )
-            {
-              if( !ids_to_show.Contains( e.Id ) )
+              // Unhide hidden elements
+
+              List<ElementId> ids_to_unhide = new List<ElementId>();
+
+              foreach( ElementId id in ids_to_show )
               {
-                if( !e.CanBeHidden( view2 ) )
+                Element e = doc.GetElement( id );
+                if( e.IsHidden( view2 ) )
                 {
-                  ids_cannot_hide.Add( e.Id );
-                }
-                else
-                {
-                  ids_to_hide.Add( e.Id );
+                  ids_to_unhide.Add( id );
                 }
               }
+              view2.UnhideElements( ids_to_unhide );
+
+              // Hide unhidden elements
+
+              FilteredElementCollector els
+                = new FilteredElementCollector( doc, view2.Id );
+
+              List<ElementId> ids_to_hide = new List<ElementId>();
+              List<ElementId> ids_cannot_hide = new List<ElementId>();
+
+              foreach( Element e in els )
+              {
+                if( !ids_to_show.Contains( e.Id ) )
+                {
+                  if( !e.CanBeHidden( view2 ) )
+                  {
+                    ids_cannot_hide.Add( e.Id );
+                  }
+                  else
+                  {
+                    ids_to_hide.Add( e.Id );
+                  }
+                }
+              }
+              view2.HideElements( ids_to_hide );
+
+              tx.Commit();
             }
-            view2.HideElements( ids_to_hide );
           }
         }
       }
