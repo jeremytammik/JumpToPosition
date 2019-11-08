@@ -2,10 +2,12 @@
 
 .NET C# Revit add-in setting view target and view direction to specified values.
 
-The add-in implements two separate external commands:
+The add-in implements several separate external commands:
 
 - [CmdJumpToBrowserView &ndash; Jump to Browser View](#cmdjumptobrowserview)
 - [CmdJumpToRevitPosition &ndash; Jump to Revit Position](#cmdjumptorevitposition)
+- [CmdViewListedElements &ndash; Create a new View Displaying Specified Elements](#cmdviewlistedelements)
+
 
 ## <a name="cmdjumptobrowserview"><a/> CmdJumpToBrowserView &ndash; Jump to Browser View
 
@@ -189,3 +191,21 @@ Unfortunately, if the original view name is "{3D}", we are unable to reset it af
 Next, I tried toggling the 'far bound active' on and off, and that works as well.
 
 Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the complete implementation.
+
+
+## <a name="cmdviewlistedelements"><a/> CmdViewListedElements &ndash; Create a new View Displaying Specified Elements
+
+Given a file with a list of element ids and a level id, create a new view where only these elements are visible in the given level.
+
+Create a 2D plan view on the given level, I assume?
+
+Let's communicate over files within hardcoded file paths.
+Read the file c:\temp\revit_view_creator_config.json and use it.
+The JSON format will be something similar to:
+
+```
+  {
+    "level_id": "...",
+    "ids_to_show": ["id1", "id2"]
+  }
+```
