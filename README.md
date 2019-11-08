@@ -4,9 +4,9 @@
 
 The add-in implements several separate external commands:
 
-- [CmdJumpToBrowserView &ndash; Jump to Browser View](#cmdjumptobrowserview)
+- [CmdJumpToBrowserView &ndash; Jump to browser view](#cmdjumptobrowserview)
 - [CmdJumpToRevitPosition &ndash; Jump to Revit Position](#cmdjumptorevitposition)
-- [CmdViewListedElements &ndash; Create a new View Displaying Specified Elements](#cmdviewlistedelements)
+- [CmdViewListedElements &ndash; Create a new view displaying specified elements](#cmdviewlistedelements)
 
 
 ## <a name="cmdjumptobrowserview"><a/> CmdJumpToBrowserView &ndash; Jump to Browser View
@@ -193,7 +193,7 @@ Next, I tried toggling the 'far bound active' on and off, and that works as well
 Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the complete implementation.
 
 
-## <a name="cmdviewlistedelements"><a/> CmdViewListedElements &ndash; Create a new View Displaying Specified Elements
+## <a name="cmdviewlistedelements"><a/> CmdViewListedElements &ndash; Create a New View Displaying Specified Elements
 
 Given a file with a list of element ids and a level id, create a new view where only these elements are visible in the given level.
 
