@@ -199,9 +199,8 @@ Given a file with a list of element ids and a level id, create a new view where 
 
 Create a 2D plan view on the given level, I assume?
 
-Let's communicate over files within hardcoded file paths.
-Read the file c:\temp\revit_view_creator_config.json and use it.
-The JSON format will be something similar to:
+Let's communicate over a hardcoded file path, e.g., `C:/tmp/revit_view_creator_config.json`.
+The JSON format can look like this:
 
 ```
   {
