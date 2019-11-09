@@ -28,17 +28,18 @@ namespace JumpToPosition
     /// Read JSON input file and return success
     /// </summary>
     static bool ReadInput(
+      string filepath,
       out ElementId id_level,
       out List<ElementId> ids_to_show )
     {
       id_level = ElementId.InvalidElementId;
       ids_to_show = null;
 
-      if( File.Exists( _input_file_path ) )
+      if( File.Exists( filepath ) )
       {
         InputData d = (new JavaScriptSerializer())
           .Deserialize<InputData>( File
-          .ReadAllText( _input_file_path ) );
+          .ReadAllText( filepath ) );
 
         id_level = new ElementId( d.id_level );
         ids_to_show = new List<ElementId>();
@@ -65,7 +66,15 @@ namespace JumpToPosition
       ElementId id_level;
       List<ElementId> ids_to_show;
 
-      if( ReadInput( out id_level, out ids_to_show ) )
+      if( !ReadInput( _input_file_path, out id_level, 
+        out ids_to_show ) )
+      {
+        Util.ErrorMsg( string.Format(
+          "Error reading level id and ids to show " 
+          + "from input JSON file '{0}'.", 
+          _input_file_path ) );
+      }
+      else
       {
         Level level = doc.GetElement( id_level ) as Level;
 
