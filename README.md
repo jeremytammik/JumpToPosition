@@ -204,7 +204,7 @@ The JSON format can look like this:
 
 ```
   {
-    "level_id": "...",
+    "id_level": "...",
     "ids_to_show": ["id1", "id2"]
   }
 ```

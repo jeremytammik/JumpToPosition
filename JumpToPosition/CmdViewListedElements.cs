@@ -18,7 +18,7 @@ namespace JumpToPosition
     /// <summary>
     /// JSON input file specifying element ids of 
     /// level and BIM elements to display on it.
-    /// JSON format: { "level_id" : "...", 
+    /// JSON format: { "id_level" : "...", 
     /// "ids_to_show" : ["id1", "id2"] }
     /// </summary>
     const string _input_file_path
@@ -31,8 +31,6 @@ namespace JumpToPosition
       out ElementId id_level,
       out List<ElementId> ids_to_show )
     {
-      bool rc = false;
-
       id_level = ElementId.InvalidElementId;
       ids_to_show = null;
 
@@ -49,7 +47,9 @@ namespace JumpToPosition
           ids_to_show.Add( new ElementId( i ) );
         }
       }
-      return rc;
+      return ElementId.InvalidElementId != id_level
+        && 0 < ids_to_show.Count;
+      ;
     }
 
     public Result Execute(
