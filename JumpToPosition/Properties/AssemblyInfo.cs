@@ -45,6 +45,7 @@ using System.Runtime.InteropServices;
 // 2019-10-13 2020.0.0.5 implemented GetUsername
 // 2019-11-07 2020.0.0.6 implemented CmdViewListedElements and ReadInputFile
 // 2019-11-08 2020.0.0.6 implemented CmdViewListedElements
+// 2019-11-09 2020.0.0.6 completed, sucessfully tested and documented CmdViewListedElements
 // 
 [assembly: AssemblyVersion( "2020.0.0.6" )]
 [assembly: AssemblyFileVersion( "2020.0.0.6" )]
