@@ -86,7 +86,7 @@ namespace JumpToPosition
         else
         {
           ElementId id_view = level.FindAssociatedPlanViewId();
-          View view = doc.GetElement( id_level ) as View;
+          View view = doc.GetElement( id_view ) as View;
 
           if( null == view )
           {
