@@ -18,4 +18,13 @@
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
   </AddIn>
+  <AddIn Type="Command">
+    <Text>View Listed Elements</Text>
+    <Description>Create a new view dsiplaying only selected elements</Description>
+    <Assembly>JumpToPosition.dll</Assembly>
+    <FullClassName>JumpToPosition.CmdViewListedElements</FullClassName>
+    <ClientId></ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
 </RevitAddIns>
