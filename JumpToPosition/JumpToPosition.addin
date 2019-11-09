@@ -23,7 +23,7 @@
     <Description>Create a new view dsiplaying only selected elements</Description>
     <Assembly>JumpToPosition.dll</Assembly>
     <FullClassName>JumpToPosition.CmdViewListedElements</FullClassName>
-    <ClientId></ClientId>
+    <ClientId>bd9092fb-8ba8-4907-8971-1f50d15efde9</ClientId>
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
   </AddIn>
