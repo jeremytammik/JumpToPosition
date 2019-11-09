@@ -6,7 +6,7 @@ The add-in implements several separate external commands:
 
 - [CmdJumpToBrowserView &ndash; Jump to browser view](#cmdjumptobrowserview)
 - [CmdJumpToRevitPosition &ndash; Jump to Revit Position](#cmdjumptorevitposition)
-- [CmdJumpToDashboard &ndash; Jump from selected element to external app dashboard](#cmdjumptodashboard)
+- [CmdJumpToDashboard &ndash; Jump from element to external app dashboard](#cmdjumptodashboard)
 - [CmdViewListedElements &ndash; Create a new view displaying specified elements](#cmdviewlistedelements)
 
 
@@ -194,7 +194,7 @@ Next, I tried toggling the 'far bound active' on and off, and that works as well
 Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the complete implementation.
 
 
-## <a name="cmdjumptodashboard"><a/> CmdJumpToDashboard &ndash; Jump From Selected Element to External App Dashboard
+## <a name="cmdjumptodashboard"><a/> CmdJumpToDashboard &ndash; Jump from Element to External App Dashboard
 
 Task: populate all elements with an additional property `url_dashboard`.
 On launching the `CmdJumpToDashboard` command, picking a given element launches the browser with the associated URL.
