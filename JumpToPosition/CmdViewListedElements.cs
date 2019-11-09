@@ -138,7 +138,10 @@ namespace JumpToPosition
                   ids_to_unhide.Add( id );
                 }
               }
-              view2.UnhideElements( ids_to_unhide );
+              if( 0 < ids_to_unhide.Count )
+              {
+                view2.UnhideElements( ids_to_unhide );
+              }
 
               // Hide unhidden elements
 
@@ -162,7 +165,10 @@ namespace JumpToPosition
                   }
                 }
               }
-              view2.HideElements( ids_to_hide );
+              if( 0 < ids_to_hide.Count )
+              {
+                view2.HideElements( ids_to_hide );
+              }
 
               tx.Commit();
 
