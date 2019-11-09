@@ -156,6 +156,8 @@ namespace JumpToPosition
               view2.HideElements( ids_to_hide );
 
               tx.Commit();
+
+              rc = Result.Succeeded;
             }
           }
         }
