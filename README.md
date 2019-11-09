@@ -210,6 +210,6 @@ Here is a sample JSON input file that explains how the format is defined:
 The specified level has a plan view associated with it.
 This view is duplicated.
 
-The new view is named by appending the number of elements to display and the current date in ISO format to the orignal view name, e.g., `Level 0_showing_2_elements_2019-11-09`.
+The new view is named by appending the number of elements to display and the current date in ISO format to the original view name, e.g., `Level 0_showing_2_elements_2019-11-09`.
 
 In the new view, all elements listed in `ids_to_show` are unhidden and all elements not listed there are hidden.
