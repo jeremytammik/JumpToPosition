@@ -224,7 +224,7 @@ The user never needs to see or edit the URL, or be allowed to tweak it?
 If so, a shared parameter would simplify that.
 But, it would also clutter up the list of element properties...
 
-The user probably need no interaction with the URL, and even if she did, it could be exposed and implemented by the add-in, e.g "show latest image", "show schedule info", and so on.
+The user probably need no interaction with the URL, and, even if she did, it could be exposed and implemented by the add-in, e.g "show latest image", "show schedule info", and so on.
 
 [Q] Can different add-ins be enabled to interact with the same data?
 
