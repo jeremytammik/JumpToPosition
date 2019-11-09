@@ -197,14 +197,19 @@ Please refer to [JumpToPosition.cs](JumpToPosition/JumpToPosition.cs) for the co
 
 Given a file with a list of element ids and a level id, create a new view where only these elements are visible in the given level.
 
-Create a 2D plan view on the given level, I assume?
-
-Let's communicate over a hardcoded file path, e.g., `C:/tmp/revit_view_creator_config.json`.
-The JSON format can look like this:
+The command input is specified via a hardcoded file path, `C:/tmp/revit_view_creator_config.json`.
+Here is a sample JSON input file that explains how the format is defined:
 
 ```
   {
-    "id_level": "...",
-    "ids_to_show": ["id1", "id2"]
+    "id_level" : 311,
+    "ids_to_show" : [307847, 307849]
   }
 ```
+
+The specified level has a plan view associated with it.
+This view is duplicated.
+
+The new view is named by appending the number of elements to display and the current date in ISO format to the orignal view name, e.g., `Level 0_showing_2_elements_2019-11-09`.
+
+In the new view, all elements listed in `ids_to_show` are unhidden and all elements not listed there are hidden.
