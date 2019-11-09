@@ -214,6 +214,7 @@ Extensible storage was created as an API thing only.
 No UI whatsoever.
 Revit does not interact with the data at all.
 The add-in has complete responsibility.
+Here are [several discussions about extensible storage](https://thebuildingcoder.typepad.com/blog/about-the-author.html#5.23).
 
 Neither is particularly tricky to implement.
 
@@ -222,8 +223,6 @@ If the data is purely intended for internal add-in use, extensible storage is no
 The user never needs to see or edit the URL, or be allowed to tweak it?
 If so, a shared parameter would simplify that.
 But, it would also clutter up the list of element properties...
-
-Here are [several discussions about extensible storage](https://thebuildingcoder.typepad.com/blog/about-the-author.html#5.23).
 
 The user probably need no interaction with the URL, and even if she did, it could be exposed and implemented by the add-in, e.g "show latest image", "show schedule info", and so on.
 
