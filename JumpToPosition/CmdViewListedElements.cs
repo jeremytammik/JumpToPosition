@@ -123,7 +123,7 @@ namespace JumpToPosition
               // Create new view
 
               id_view = view.Duplicate( ViewDuplicateOption.AsDependent );
-              View view2 = doc.GetElement( id_level ) as View;
+              View view2 = doc.GetElement( id_view ) as View;
               view2.Name = view_name;
 
               // Unhide hidden elements
