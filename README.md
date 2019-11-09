@@ -246,6 +246,16 @@ All doable, but not super simple, and maybe a bit costly, performance-wise.
 OK, I see the problem with the custom tooltips.
 Let's keep it as "on plugin click".
 
+Next thought, pondering how to populate the `url_dashboard` property on all the elements...
+
+Is there even any need at all to specify such a thing?
+
+Maybe a much simpler approach would be to use the existing element data, e.g., element id or element unique id, and simply append that to a constant base URL.
+
+So, if the base URL is something like `http://myexternalapp.com/dashboard/element`, the add-in could simply launch the browser and specify that base URL with an element id or unique id appended to it.
+
+That would save the entire discussion above on this topic, and simplify things quite significantly.
+
 
 
 ## <a name="cmdviewlistedelements"><a/> CmdViewListedElements &ndash; Create a New View Displaying Specified Elements
