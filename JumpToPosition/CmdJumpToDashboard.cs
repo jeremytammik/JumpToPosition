@@ -31,7 +31,7 @@ namespace JumpToPosition
 
       if( Result.Succeeded == r )
       {
-        string url = _url_base + "/" + e.UniqueId;
+        string url = _url_base + e.UniqueId;
 
         Process.Start( url );
       }
