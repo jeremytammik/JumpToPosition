@@ -239,7 +239,7 @@ An add-in can impersonate another add-in to read its extensible storage anyway, 
 
 ### No Need for Custom Data on each BIM Element
 
-Next thought, pondering how to populate the `url_dashboard` property on all the elements...
+Later, pondering how to populate the `url_dashboard` property on all the elements...
 
 Is there even any need at all to specify such a thing?
 
