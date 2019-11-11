@@ -2,7 +2,7 @@
 <RevitAddIns>
   <AddIn Type="Command">
     <Text>Jump To Revit Position</Text>
-    <Description>Set up specified view and view direction</Description>
+    <Description>Set up specified Revit view and view direction</Description>
     <Assembly>JumpToPosition.dll</Assembly>
     <FullClassName>JumpToPosition.CmdJumpToRevitPosition</FullClassName>
     <ClientId>dba759ee-a32e-4f26-8213-8c036c1c6276</ClientId>
@@ -11,10 +11,19 @@
   </AddIn>
   <AddIn Type="Command">
     <Text>Jump To Browser View</Text>
-    <Description>Open external browser view of selected element</Description>
+    <Description>Open external app browser view of selected element</Description>
     <Assembly>JumpToPosition.dll</Assembly>
     <FullClassName>JumpToPosition.CmdJumpToBrowserView</FullClassName>
     <ClientId>415aed26-1d76-49e3-a9f7-5b915b0929a1</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>Jump To Dashboard</Text>
+    <Description>Open external app browser dashboard for selected element</Description>
+    <Assembly>JumpToPosition.dll</Assembly>
+    <FullClassName>JumpToPosition.CmdJumpToDashboard</FullClassName>
+    <ClientId>aa99c1a3-d877-4584-ba18-3570ce98137a</ClientId>
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
   </AddIn>

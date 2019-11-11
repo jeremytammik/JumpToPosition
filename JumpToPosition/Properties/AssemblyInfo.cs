@@ -46,6 +46,7 @@ using System.Runtime.InteropServices;
 // 2019-11-07 2020.0.0.6 implemented CmdViewListedElements and ReadInputFile
 // 2019-11-08 2020.0.0.6 implemented CmdViewListedElements
 // 2019-11-09 2020.0.0.6 completed, successfully tested and documented CmdViewListedElements
+// 2019-11-11 2020.0.0.7 implemented CmdJumpToDashboard
 // 
-[assembly: AssemblyVersion( "2020.0.0.6" )]
-[assembly: AssemblyFileVersion( "2020.0.0.6" )]
+[assembly: AssemblyVersion( "2020.0.0.7" )]
+[assembly: AssemblyFileVersion( "2020.0.0.7" )]

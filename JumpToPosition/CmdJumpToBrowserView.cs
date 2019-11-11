@@ -17,7 +17,7 @@ namespace JumpToPosition
     /// Return a single preselected element
     /// or prompt user to select one.
     /// </summary>
-    Result GetSingleSelectedElement(
+    public static Result GetSingleSelectedElement(
       UIDocument uidoc,
       ref string message,
       out Element e )
@@ -66,7 +66,7 @@ namespace JumpToPosition
     /// If that is not well-defined, return the level
     /// of the given element, else "<nil>".
     /// </summary>
-    string GetLevelFor(
+    static string GetLevelFor(
       Element e,
       View view )
     {
@@ -87,7 +87,7 @@ namespace JumpToPosition
     /// <summary>
     /// Return the current Revit user name.
     /// </summary>
-    string GetUsername( Application app )
+    static string GetUsername( Application app )
     {
       return app.Username;
     }
@@ -95,7 +95,7 @@ namespace JumpToPosition
     /// <summary>
     /// Return the Revit application version string.
     /// </summary>
-    string GetAppVersionString( Application app )
+    static string GetAppVersionString( Application app )
     {
       return string.Format(
         "{0} {1}.{2}.{3}", app.VersionName,
@@ -107,7 +107,7 @@ namespace JumpToPosition
     /// Return relevant view information (from
     /// Revit API documentation help file  sample).
     /// </summary>
-    string GetViewInfo( View view )
+    static string GetViewInfo( View view )
     {
       string message = string.Empty;
 
@@ -165,7 +165,7 @@ namespace JumpToPosition
     /// Return relevant 3D view information (from
     /// Revit API documentation help file  sample).
     /// </summary>
-    string GetView3dInfo( View3D view3d )
+    static string GetView3dInfo( View3D view3d )
     {
       string message = "3D View: ";
 
@@ -230,7 +230,7 @@ namespace JumpToPosition
     /// Revit version, model version, current view 
     /// direction (x,y,z, front, up, ...).
     /// </summary>
-    string GetBrowserViewInfoFor(
+    static string GetBrowserViewInfoFor(
       Element e,
       View view )
     {

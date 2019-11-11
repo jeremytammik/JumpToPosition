@@ -63,6 +63,7 @@
     <Compile Include="JumpForm.Designer.cs">
       <DependentUpon>JumpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CmdJumpToDashboard.cs" />
     <Compile Include="JumpToPosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util.cs" />
